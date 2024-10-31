@@ -8,11 +8,12 @@ import openapi.service.authen.token as token_service
 import openapi.utils.Constant as constant
 import openapi.service.account.account as account_service
 import openapi.service.derivative.derivative as derivative_service
+import openapi.dto.derivative_dto.derivative_dto as derivative_dto
 
 def main():
     """
     # 2.1.1. Exchange API Key for JWT Token
-    response_dto = token_service.get_token(constant.api_key, "394032")
+    response_dto = token_service.get_token(constant.api_key, "999770")
     print(response_dto)
     """
 
@@ -175,12 +176,60 @@ def main():
     print(response_dto)
     """
 
+    """
     # 6.1.1. Money derivative
     account_id = "105C325262"
-    sub_account_id = "105C738764A"
+    sub_account_id = "105C325262A"
     get_type = "0"
     response_dto = derivative_service.get_total_cash_derivative(account_id, sub_account_id, get_type)
     print(response_dto)
+    """
+
+    """
+    # 6.2.1. Asset, position close
+    account_id = "105C325262"
+    sub_account_id = "105C325262A"
+    symbol = "FPT"
+    page_no = 1
+    page_size = 10
+    response_dto = derivative_service.get_asset_position_close(account_id, sub_account_id, symbol, page_no, page_size)
+    print(response_dto)
+    """
+
+    """
+    # 6.2.2. Asset, position open
+    account_id = "105C325262"
+    sub_account_id = "105C325262A"
+    response_dto = derivative_service.get_asset_position_open(account_id, sub_account_id)
+    print(response_dto)
+    """
+
+    """
+    # 6.3.1. Get list of orders
+    account_id = "105C325262"
+    page_no = 1
+    page_size = 10
+    symbol = "FPT"
+    order_type = "ALL,ALL"
+    status = "1"
+    response_dto = derivative_service.get_list_order_normal(page_no, page_size, account_id, symbol, order_type, status)
+    print(response_dto)
+    """
+
+    """
+    # 6.3.2. Get list of conditional orders
+    page_no = 1
+    page_size = 10
+    account_id = "105C325262"
+    sub_account_id = "105C325262A"
+    order_status = "0"
+    order_type = ""
+    symbol = "ALL,ALL"
+    response_dto = derivative_service.place_order(page_no, page_size, account_id, sub_account_id, order_status, order_type, symbol)
+    print(response_dto)
+    """
+
+
 
 if __name__ == "__main__":
     main()
